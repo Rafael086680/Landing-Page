@@ -1,1 +1,62 @@
 
+
+.navbar{
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 10px 50px;
+     background: rgba(255, 255, 255, 0.92);
+     box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.logo{
+    cursor: pointer;
+    background-size: contain;
+    background-color:black;
+  
+}
+
+.op1,
+.op2,
+.op3{
+    background-color: rgba(240, 238, 238, 0.686);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+     box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.logout{
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+
+.main{
+    background-image: url(assets/fundoinicio.png);
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: space-between;
+    background-size: cover;
+    height: 20rem;
+}
+    
+.start{
+    align-items: center;
+    padding: 20px;
+}
+
+.b3{
+    cursor:pointer;
+    border:none;
+    background-color:rgb(185, 212, 225)
+}
+
+.imgp{
+    
+}
+
+
+
+
