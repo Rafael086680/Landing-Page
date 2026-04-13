@@ -1,48 +1,373 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landing Page</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VitaPet Veterinária</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
-  
-  <header class="navbar">
-    <div class="logo"> 
-      <img src="https://i.inimg.com/736x/0e/59/a4/0e59a44cf23d22ba507894f301b6cf85.jpg"> 
-    </div>
-  
-
-    <div class="op">
-      <ul>
-        <button class="op1">Perfil</button>
-        <button class="op2">Serviços</button>
-        <button class="op3">Ajuda</button>
+  <header class="cabecalho">
+    <nav class="menu" aria-label="Navegação principal">
+      <a href="#" class="logo">
+        <span class="icon-pata" aria-hidden="true"></span>VitaPet
+      </a>
+      <ul class="menu-links">
+        <li><a href="#sobre">Meu Perfil</a></li>
+        <li><a href="#pets">Meus Pets</a></li>
+        <li><a href="#agenda">Agenda</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#contato" class="botao-contato">Contato</a></li>
       </ul>
-    </div>
-
-    <div class="usuario">
-      <button class="logout">Log out</button>
-    </div>
+    </nav>
   </header>
 
+  <main>
 
-  <div class="main">
+    <section class="destaque" id="inicio" aria-labelledby="titulo-destaque">
+      <div class="bolha bolha-verde" aria-hidden="true"></div> 
+      <div class="bolha bolha-laranja" aria-hidden="true"></div>
 
-   <div class="start">
-     <main>
-      <h1 class="b1">Titulo</h1>
-      <p class="b2">asdvfasgdkjadadasdasd</p>
-      <button class="b3">tajsdhasjdasdasd</button>
-     </main>
-   </div>
+      <div class="destaque-texto">
+        <p class="saudacao">Bem-vindo(a) de volta</p>
+        <h1 id="titulo-destaque">Olá, <em>Rafael!</em></h1>
+        <p class="destaque-descricao">
+          Aqui você encontra o prontuário completo dos seus companheiros,
+          próximas consultas e muito mais. Tudo em um só lugar.
+        </p>
+        <a href="#pets" class="botao-principal">Ver meus pets</a>
+      </div>
 
-   <div class="imgp">
-  <img src="https://i.inimg.com/1200x/46/98/ac/4698ac0353cb3a9b281cfe4984000617.jpg">
-   </div>
+      <aside class="perfil-resumo" aria-label="Resumo do perfil">
+        <div class="cartao-perfil"> 
 
-  </div>
+          <!-- Avatar do tutor com botão decorativo de edição -->
+          <div class="avatar-wrapper" aria-hidden="true">
+            <div class="avatar-tutor" aria-label="Iniciais de Rafael Rodrigues">RR</div>
+            <span class="editar-foto" title="Editar foto (decorativo)"></span>
+          </div>
+
+          <p class="nome-tutor">Rafael Rodrigues</p>
+          <p class="tipo-tutor">Tutor · Cliente desde 2018</p>
+          <dl class="estatisticas">
+            <div class="numero">
+              <dt>Pets</dt>
+              <dd>3</dd>
+            </div>
+            <div class="numero">
+              <dt>Consultas</dt>
+              <dd>20</dd>
+            </div>
+            <div class="numero">
+              <dt>Vacinas</dt>
+              <dd>12</dd>
+            </div>
+          </dl>
+        </div>
+      </aside>
+    </section>
+
+    <section class="sobre" id="sobre" aria-labelledby="titulo-sobre">
+      <div class="container">
+        <h2 id="titulo-sobre">Meu Perfil</h2>
+        <p class="subtitulo">Dados cadastrais e preferências de atendimento</p>
+        <div class="grade-cards">
+
+          <article class="card-info">
+            <!-- Imagem do card com botão decorativo de trocar -->
+            <div class="imagem-card-perfil">
+              <img src="assets/dadoscat.jpg" alt="Imagem representando dados pessoais">
+              <span class="trocar-imagem" aria-hidden="true"></span>
+            </div>
+            <h3>Dados Pessoais</h3>
+            <dl class="lista-dados">
+              <dt>Nome</dt>      <dd>Rafael Rodrigues</dd>
+              <dt>CPF</dt>       <dd>***.456.789-**</dd>
+              <dt>Telefone</dt>  <dd>(47) 99123-4567</dd>
+              <dt>E-mail</dt>    <dd>rafaelro@gmail.com</dd>
+            </dl>
+          </article>
+
+          <article class="card-info">
+            <div class="imagem-card-perfil">
+              <img src="assets/homecat.jpg" alt="Imagem representando endereço">
+              <span class="trocar-imagem" aria-hidden="true"></span>
+            </div>
+            <h3>Endereço</h3>
+            <dl class="lista-dados">
+              <dt>Rua</dt>     <dd>Rua das Graças, 182</dd>
+              <dt>Bairro</dt>  <dd>São Luís</dd>
+              <dt>Cidade</dt>  <dd>Jaraguá do Sul — SC</dd>
+              <dt>CEP</dt>     <dd>89203-000</dd>
+            </dl>
+          </article>
+
+          <article class="card-info">
+            <div class="imagem-card-perfil">
+              <img src="assets/doctorcat.jpg" alt="Imagem representando veterinário responsável">
+              <span class="trocar-imagem" aria-hidden="true"></span>
+            </div>
+            <h3>Vet Responsável</h3>
+            <dl class="lista-dados">
+              <dt>Médico</dt>        <dd>Dr. Fernando Moura</dd>
+              <dt>CRMV</dt>          <dd>SC-12345</dd>
+              <dt>Especialidade</dt> <dd>Clínico Geral</dd>
+              <dt>Contato</dt>       <dd>(47) 3322-0001</dd>
+            </dl>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="pets" id="pets" aria-labelledby="titulo-pets">
+      <div class="container">
+        <h2 id="titulo-pets">Meus Companheiros</h2>
+        <p class="subtitulo">Ficha completa de cada um dos seus pets</p>
+
+        <article class="ficha-pet" id="pet-sheik" aria-labelledby="nome-sheik">
+          <div class="foto-pet">
+            <img class="avatar-pet cachorro" src="assets/sheikavatar.jpg" alt="Foto do Sheik">
+            <!-- Botão decorativo de trocar foto do pet -->
+            <span class="trocar-pet" aria-hidden="true"></span>
+            <span class="etiqueta etiqueta-cao">Cão</span>
+          </div>
+          <div class="dados-pet">
+            <header>
+              <h3 id="nome-sheik">Sheik</h3>
+              <p class="raca">Bull Terrier · Macho</p>
+            </header>
+            <div class="grade-ficha">
+              <dl class="ficha-dados">
+                <dt>Nascimento</dt> <dd>12/03/2015</dd>
+                <dt>Idade</dt>      <dd>11 anos</dd>
+                <dt>Peso</dt>       <dd>25 kg</dd>
+                <dt>Tipo Sanguíneo</dt><dd><span class="tipo-sanguineo">DEA 1.1+</span></dd>
+                <dt>Microchip</dt>  <dd>941000019823</dd>
+                <dt>Castrado</dt>   <dd><span class="etiqueta-sim">✔ Sim</span></dd>
+              </dl>
+              <div class="historico-saude">
+                <h4>Histórico de Saúde</h4>
+                <ul class="lista-saude">
+                  <li class="registro atencao">
+                    <span class="sheik-status" aria-hidden="true"></span>
+                    <div><strong>Displasia de Quadril</strong><small>Diagnosticado em 2022 · Em acompanhamento</small></div>
+                  </li>
+                  <li class="registro saudavel">
+                    <span class="sheik-status" aria-hidden="true"></span>
+                    <div><strong>Vacinação em dia</strong><small>V10 + Antirrábica · Válido até 10/2026</small></div>
+                  </li>
+                  <li class="registro saudavel">
+                    <span class="sheik-status" aria-hidden="true"></span>
+                    <div><strong>Vermifugação</strong><small>Realizada em 01/04/2026</small></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="ficha-pet" id="pet-missinha" aria-labelledby="nome-missinha">
+          <div class="foto-pet">
+            <img class="avatar-pet gato" src="assets/missinha.jpg" alt="Foto da Missinha">
+            <span class="trocar-pet" aria-hidden="true"></span>
+            <span class="etiqueta etiqueta-gato">Gata</span>
+          </div>
+          <div class="dados-pet">
+            <header>
+              <h3 id="nome-missinha">Missinha</h3>
+              <p class="raca">SRD · Fêmea</p>
+            </header>
+            <div class="grade-ficha">
+              <dl class="ficha-dados">
+                <dt>Nascimento</dt>    <dd>01/12/2018</dd>
+                <dt>Idade</dt>         <dd>7 anos</dd>
+                <dt>Peso</dt>          <dd>2,4 kg</dd>
+                <dt>Tipo Sanguíneo</dt><dd><span class="tipo-sanguineo">Tipo A</span></dd>
+                <dt>Microchip</dt>     <dd>941000027641</dd>
+                <dt>Castrada</dt>      <dd><span class="etiqueta-sim">✔ Sim</span></dd>
+              </dl>
+              <div class="historico-saude">
+                <h4>Histórico de Saúde</h4>
+                <ul class="lista-saude">
+                  <li class="registro alerta">
+                    <span class="sheik-status" aria-hidden="true"></span>
+                    <div><strong>Rinite Crônica</strong><small>Em tratamento contínuo com medicação</small></div>
+                  </li>
+                  <li class="registro alerta">
+                    <span class="sheik-status" aria-hidden="true"></span>
+                    <div><strong>Alergia Alimentar</strong><small>Restrição: frango e grãos</small></div>
+                  </li>
+                  <li class="registro saudavel">
+                    <span class="sheik-status" aria-hidden="true"></span>
+                    <div><strong>Vacinação em dia</strong><small>Quádrupla Felina · Válido até 05/2026</small></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="ficha-pet" id="pet-paulinho" aria-labelledby="nome-paulinho">
+          <div class="foto-pet">
+            <img class="avatar-pet gato" src="assets/paulinho.png" alt="Foto do Paulinho">
+            <span class="trocar-pet" aria-hidden="true"></span>
+            <span class="etiqueta etiqueta-gato">Gato</span>
+          </div>
+          <div class="dados-pet">
+            <header>
+              <h3 id="nome-paulinho">Paulinho</h3>
+              <p class="raca">SRD · Macho</p>
+            </header>
+            <div class="grade-ficha">
+              <dl class="ficha-dados">
+                <dt>Nascimento</dt>    <dd>12/02/2023</dd>
+                <dt>Idade</dt>         <dd>3 anos</dd>
+                <dt>Peso</dt>          <dd>4,0 kg</dd>
+                <dt>Tipo Sanguíneo</dt><dd><span class="tipo-sanguineo">Tipo B</span></dd>
+                <dt>Microchip</dt>     <dd>Não cadastrado</dd>
+                <dt>Castrado</dt>      <dd><span class="etiqueta-nao">✗ Não</span></dd>
+              </dl>
+              <div class="historico-saude">
+                <h4>Histórico de Saúde</h4>
+                <ul class="lista-saude">
+                  <li class="registro saudavel">
+                    <span class="sheik-status" aria-hidden="true"></span>
+                    <div><strong>Sem doenças registradas</strong><small>Última consulta: 15/03/2026</small></div>
+                  </li>
+                  <li class="registro saudavel">
+                    <span class="sheik-status" aria-hidden="true"></span>
+                    <div><strong>Vacinação em dia</strong><small>Antirrábica + Vacina V5 · Válido até 07/2026</small></div>
+                  </li>
+                  <li class="registro atencao">
+                    <span class="sheik-status" aria-hidden="true"></span>
+                    <div><strong>Castração Recomendada</strong><small>Aguardando agendamento</small></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="agenda" id="agenda" aria-labelledby="titulo-agenda">
+      <div class="container">
+        <h2 class="titulo-claro" id="titulo-agenda">Próximas Consultas</h2>
+        <p class="subtitulo subtitulo-claro">Sua agenda de atendimentos veterinários</p>
+        <div class="grade-agenda">
+
+          <article class="consulta urgente">
+            <div class="data-consulta"><strong>18</strong><span>ABR</span></div>
+            <div class="info-consulta">
+              <h3>Retorno — Sheik</h3>
+              <p>Avaliação ortopédica da displasia · Dr. Fernando Moura</p>
+              <time datetime="2026-04-18T10:00">10h00 · Sala 3</time>
+            </div>
+            <span class="status status-urgente">Em breve</span>
+          </article>
+
+          <article class="consulta">
+            <div class="data-consulta"><strong>07</strong><span>MAI</span></div>
+            <div class="info-consulta">
+              <h3>Vacina Anual — Missinha</h3>
+              <p>Quádrupla Felina + antirrábica · Dra. Carla Lima</p>
+              <time datetime="2026-05-05T14:30">14h30 · Recepção</time>
+            </div>
+            <span class="status status-confirmado">Confirmado</span>
+          </article>
+
+          <article class="consulta">
+            <div class="data-consulta"><strong>22</strong><span>MAI</span></div>
+            <div class="info-consulta">
+              <h3>Castração — Paulinho</h3>
+              <p>Procedimento cirúrgico · Dr. Fernando Moura</p>
+              <time datetime="2026-05-22T08:00">08h00 · Centro Cirúrgico</time>
+            </div>
+            <span class="status status-pendente">Pendente</span>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="galeria" id="galeria" aria-labelledby="titulo-galeria">
+      <div class="container">
+        <h2 id="titulo-galeria">Galeria de Momentos</h2>
+        <p class="subtitulo">Memórias especiais dos nossos pacientes</p>
+        <div class="grade-fotos">
+          <figure class="foto foto-grande">
+            <div class="imagem imagem-1"></div>
+          </figure>
+          <figure class="foto">
+            <div class="imagem imagem-2"></div>
+          </figure>
+          <figure class="foto">
+            <div class="imagem imagem-3"></div>
+          </figure>
+          <figure class="foto">
+            <div class="imagem imagem-4"></div>
+          </figure>
+          <figure class="foto">
+            <div class="imagem imagem-5"></div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="contato" id="contato" aria-labelledby="titulo-contato">
+      <div class="container contato-interno">
+        <div class="contato-texto">
+          <h2 id="titulo-contato">Precisa de Ajuda?</h2>
+          <p>Nossa equipe está pronta para te atender com todo carinho que seus pets merecem.</p>
+          <address class="contato-lista">
+            <p><span aria-hidden="true">📍</span> Rua Antonio, 320 — Jaraguá do Sul, SC</p>
+            <p><span aria-hidden="true">📞</span> <a href="tel:+554733220001">(47) 3322-0001</a></p>
+            <p><span aria-hidden="true">📧</span> <a href="mailto:contato@vitapet.com.br">contato@vitapet.com.br</a></p>
+            <p><span aria-hidden="true">🕐</span> Seg–Sex 8h–18h · Sáb 8h–12h</p>
+          </address>
+        </div>
+        <div class="cartao-agendamento">
+          <h3>Agendar Consulta</h3>
+          <p>Marque online pelo nosso sistema de agendamento rápido.</p>
+          <a href="#agenda" class="botao-principal">Agendar agora</a>
+          <a href="#pets" class="botao-secundario">Ver prontuários</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <div class="container rodape-interno">
+      <div class="rodape-marca">
+        <strong>VitaPet</strong>
+        <p>Cuidando da saúde e felicidade dos seus companheiros.</p>
+      </div>
+      <nav aria-label="Links do rodapé">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#sobre">Meu Perfil</a></li>
+          <li><a href="#pets">Meus Pets</a></li>
+          <li><a href="#agenda">Agenda</a></li>
+          <li><a href="#galeria">Galeria</a></li>
+        </ul>
+      </nav>
+      <div class="rodape-creditos">
+        <h4>Créditos</h4>
+        <p><strong>Aluno:</strong> Rafael Rodrigues Antonio</p>
+        <p><strong>Disciplina:</strong> Ferramentas Web e UX — HTML5 &amp; CSS3</p>
+        <p><strong>Semestre:</strong> 1º Semestre / 2026</p>
+        <p><strong>Instituição:</strong> Católica SC de Jaraguá do Sul</p>
+      </div>
+    </div>
+    <p class="rodape-fim">© 2026 VitaPet Veterinária · Todos os direitos reservados</p>
+  </footer>
 
 </body>
 </html>
