@@ -1,62 +1,873 @@
+/* --- Aqui eu defino as cores e valores que vou usar no site inteiro.
+       Assim se eu quiser mudar uma cor, mudo só aqui e muda em todo lugar --- */
+:root {
+  --bg:          #faf8f5;   /* cor de fundo geral */
+  --surface:     #ffffff;   /* branco puro, uso nos cards */
+  --verde:       #2d6a4f;   /* verde escuro principal */
+  --verde-claro: #52b788;   /* verde mais claro pro hover e detalhes */
+  --laranja:     #f4a261;   /* laranja que uso nas bolinhas decorativas */
+  --texto:       #1b1b1b;   /* cor do texto principal */
+  --cinza:       #6b7280;   /* cinza pra textos secundários */
+  --borda:       #e5e1d8;   /* cor das bordas dos cards */
 
+  /* tamanhos de borda arredondada - uso em cards, botões, etc */
+  --raio-p:  8px;   /* arredondamento pequeno */
+  --raio-m:  16px;  /* arredondamento médio */
+  --raio-g:  24px;  /* arredondamento grande */
+  --raio-xl: 40px;  /* arredondamento máximo, deixa os botões em cápsula */
 
-.navbar{
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     padding: 10px 50px;
-     background: rgba(255, 255, 255, 0.92);
-     box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-}
+  /* sombras prontas pra reutilizar */ 
+  --sombra-p: 0 2px 8px rgba(0,0,0,0.07);   /* sombra leve */
+  --sombra-m: 0 8px 32px rgba(0,0,0,0.10);  /* sombra média */
+  --sombra-g: 0 20px 60px rgba(0,0,0,0.12); /* sombra forte */
 
-.logo{ 
-    cursor: pointer;
-    background-size: contain;
-    background-color:black;
-  
-}
-
-.op1,
-.op2,
-.op3{
-    background-color: rgba(240, 238, 238, 0.686);
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-     box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-}
-
-.logout{
-    background-color: rgb(255, 255, 255);
-    cursor: pointer;
-    border-radius: 8px;
+  --titulo:      'Playfair Display', Georgia, serif; /* fonte pros títulos */
+  --texto-fonte: 'DM Sans', system-ui, sans-serif;   /* fonte limpa pro texto normal */
+  --transicao:   0.25s ease; /* velocidade padrão das animações de hover */
 }
 
 
-.main{
-    background-image: url(assets/fundoinicio.png);
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: space-between;
-    background-size: cover;
-    height: 20rem;
-}
-    
-.start{
-    align-items: center;
-    padding: 20px;
-}
+/* --- Reset: aqui eu "zero" os estilos padrão do navegador (Igual a professora TASSIANA disse nas aulas)
+       porque cada navegador tem padrões diferentes e isso bagunça o layout --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html  { scroll-behavior: smooth; } /* faz a página rolar suavemente ao clicar nos links do menu */
+body  { font-family: var(--texto-fonte); background: var(--bg); color: var(--texto); line-height: 1.65; overflow-x: hidden; }
+img   { max-width: 100%; display: block; } /* impede imagens de vazar do container */
+ul    { list-style: none; } /* remove os pontinhos das listas */
+a     { color: var(--verde); text-decoration: none; transition: color var(--transicao); } /* todos os links ficam verde sem sublinhado */
+a:hover { color: var(--verde-claro); } /* ao passar o mouse, fica no verde mais claro */
 
-.b3{
-    cursor:pointer;
-    border:none;
-    background-color:rgb(185, 212, 225)
-}
 
-.imgp{
-    
+/* --- Container: caixa centralizada que uso em todas as seções
+       pra o conteúdo não ficar grudado nas bordas da tela --- */
+.container {
+  max-width: 1140px; /* largura máxima do conteúdo */
+  margin: 0 auto;    /* centraliza na página */
+  padding: 0 24px;   /* espaço nas laterais */
 }
 
+/* todos os títulos h2 das seções seguem esse padrão */
+section h2 {
+  font-family: var(--titulo);
+  font-size: clamp(1.8rem, 4vw, 2.8rem); /* tamanho responsivo: cresce e diminui com a tela */
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* classes de apoio que uso em vários lugares */
+.subtitulo       { color: var(--cinza); margin-bottom: 48px; }
+.titulo-claro    { color: #fff; }                          /* uso na seção verde escura da agenda */
+.subtitulo-claro { color: rgba(255,255,255,0.75); }        /* subtítulo mais apagado na seção verde */
 
 
+/* --- Estilos dos dois botões principais que aparecem no site --- */
+.botao-principal, .botao-secundario {
+  display: inline-block;
+  padding: 13px 30px;
+  border-radius: var(--raio-xl); /* formato de cápsula */
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background var(--transicao), transform var(--transicao), box-shadow var(--transicao), color var(--transicao);
+}
 
+.botao-principal {
+  background: var(--verde);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(45,106,79,0.25);
+}
+
+/* efeito ao passar o mouse: fica verde claro */
+.botao-principal:hover {
+  background: var(--verde-claro);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(82,183,136,0.35);
+}
+
+.botao-secundario { border: 2px solid var(--verde); color: var(--verde); } /* só borda, sem preenchimento */
+.botao-secundario:hover { background: var(--verde); color: #fff; }         /* preenche ao passar o mouse */
+
+
+/* =============================================
+   CABEÇALHO / MENU
+   ============================================= */
+
+/* o cabeçalho fica fixo no topo enquanto a pessoa rola a página, assim ela consegue apertar as opcoes sem ter que voltar la pra cima dnv */
+.cabecalho {
+  position: sticky;   /* gruda no topo da tela */
+  top: 0;
+  z-index: 100;       /* fica na frente de tudo */
+  background: rgba(250,248,245,0.92); /* fundo levemente transparente */
+  backdrop-filter: blur(12px);        /* desfoca o conteúdo atrás, efeito vidro */
+  border-bottom: 1px solid var(--borda);
+}
+
+/* flex pra deixar o logo e os links um do lado do outro */
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 16px 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--titulo);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--verde);
+}
+
+/* ícone de patinha que aparece do lado do logo */
+.icon-pata {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("assets/pata.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.logo:hover { color: var(--verde); } /* logo não muda de cor ao hover */
+
+.menu-links { display: flex; align-items: center; gap: 32px; }
+
+.menu-links a {
+  color: var(--texto);
+  font-size: 0.92rem;
+  position: relative; /* precisa disso pra o ::after funcionar */
+}
+
+/* esse ::after cria a linha que aparece embaixo do link ao passar o mouse
+   ela começa com largura 0 e cresce até 100% */
+.menu-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 2px;         /* começa invisível */
+  background: var(--verde-claro);
+  transition: width var(--transicao);
+}
+
+.menu-links a:hover::after { width: 100%; } /* ao hover, a linha cresce */
+
+/* botão "Contato" no menu tem estilo diferente dos outros links */
+.botao-contato {
+  background: var(--verde);
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: var(--raio-xl);
+  font-size: 0.88rem;
+}
+
+.botao-contato::after { display: none; }                          /* sem a linha de hover */
+.botao-contato:hover  { background: var(--verde-claro); color: #fff; }
+
+
+/* =============================================
+   SEÇÃO DESTAQUE (a primeira tela, o "hero")
+   ============================================= */
+
+.destaque {
+  position: relative;  /* precisa disso pra posicionar as bolhas dentro */
+  min-height: 82vh;    /* ocupa quase toda a tela */
+  display: grid;
+  grid-template-columns: 1fr 420px; /* dois blocos: texto e card de perfil */
+  align-items: center;
+  gap: 40px;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 80px 24px 60px;
+  overflow: visible;
+}
+
+/* estilo base das duas bolhas decorativas de fundo */
+.bolha {
+  position: absolute;
+  border-radius: 50%;   /* círculo perfeito */
+  filter: blur(80px);   /* desfocado pra virar aquela mancha de cor */
+  opacity: 0.18;        /* bem transparente */
+  pointer-events: none; /* o mouse passa por cima sem interagir */
+}
+
+/* bolha verde grande no canto superior direito */
+.bolha-verde {
+  width: 500px; height: 500px;
+  background: var(--verde-claro);
+  top: -100px; right: -50px;
+  animation: flutuar 8s ease-in-out infinite; /* fica flutuando */
+}
+
+/* bolha laranja menor no canto inferior esquerdo */
+.bolha-laranja {
+  width: 300px; height: 300px;
+  background: var(--laranja);
+  bottom: -60px; left: 100px;
+  animation: flutuar 10s ease-in-out infinite reverse; /* flutua ao contrário */
+}
+
+/* animação de flutuar: sobe e desce levemente em loop */
+@keyframes flutuar {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-20px) scale(1.05); }
+}
+
+/* animação de aparecer subindo: uso quando a página carrega */
+@keyframes subir {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.destaque-texto {
+  position: relative;
+  z-index: 1; /* fica na frente das bolhas */
+  animation: subir 0.7s ease both; /* aparece subindo ao carregar */
+}
+
+.saudacao {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--verde-claro);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+}
+
+.destaque-texto h1 {
+  font-family: var(--titulo);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.destaque-texto h1 em { font-style: italic; color: var(--verde); } /* "Rafael!" em itálico verde */
+
+.destaque-descricao {
+  color: var(--cinza);
+  font-size: 1.05rem;
+  margin-bottom: 36px;
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+/* bloco do card de perfil, aparece um pouco depois do texto (delay de 0.2s) */
+.perfil-resumo {
+  position: relative;
+  z-index: 1;
+  animation: subir 0.7s 0.2s ease both;
+}
+
+/* o card de perfil não tem fundo, é so o conteúdo com padding */
+.cartao-perfil {
+  position: relative;
+  background: transparent;
+  padding: 32px;
+  box-shadow: none;
+  border: none;
+}
+
+/* esse ::before cria as duas linhas decorativas (esquerda e embaixo) do card de perfil
+   sem precisar adicionar nenhuma tag no HTML */
+.cartao-perfil::before {
+  content: "";
+  position: absolute;
+  left: -18px;
+  bottom: -18px;
+  width: 100%;
+  height: 100%;
+  border-left: 2px solid rgba(45, 106, 79, 0.18);
+  border-bottom: 2px solid rgba(45, 106, 79, 0.18);
+  border-radius: 0 0 0 24px;
+  pointer-events: none;
+}
+
+
+/* --- Avatar do tutor com o botãozinho de editar foto --- */
+
+/* wrapper necessário pra posicionar o botão de editar em cima do avatar */
+.avatar-wrapper {
+  position: relative;
+  width: fit-content; /* o wrapper abraça só o tamanho do avatar */
+  margin-bottom: 16px;
+}
+
+/* círculo verde com as iniciais do tutor */
+.avatar-tutor {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--verde), var(--verde-claro));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(45,106,79,0.3);
+}
+
+/* botãozinho decorativo de editar a foto, fica no canto do avatar
+   não funciona de verdade, é só visual */
+.editar-foto {
+  position: absolute;
+  bottom: 0;
+  right: -4px;
+  width: 28px;
+  height: 28px;
+  background: var(--surface);
+  border: 2px solid var(--borda);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  box-shadow: var(--sombra-p);
+  cursor: default; /* cursor normal, não de clique */
+  transition: border-color var(--transicao), box-shadow var(--transicao);
+  background-image: url("assets/ediatr.jpg"); /* ícone de editar */
+  background-size: 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ao passar o mouse, a borda fica verde com um brilho */
+.editar-foto:hover {
+  border-color: var(--verde-claro);
+  box-shadow: 0 0 0 3px rgba(82,183,136,0.15);
+}
+
+.nome-tutor { font-size: 1.1rem; font-weight: 600; }
+.tipo-tutor { font-size: 0.85rem; color: var(--cinza); margin-bottom: 24px; }
+
+/* os três números (pets, consultas, vacinas) em grid de 3 colunas */
+.estatisticas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  border-top: 1px solid var(--borda);
+  padding-top: 20px;
+}
+
+.numero { text-align: center; }
+.numero dd { font-size: 1.6rem; font-family: var(--titulo); color: var(--verde); font-weight: 700; }
+.numero dt { font-size: 0.78rem; color: var(--cinza); text-transform: uppercase; letter-spacing: 0.5px; }
+
+
+/* =============================================
+   SEÇÃO MEU PERFIL (os 3 cards de informação)
+   ============================================= */
+
+.sobre { 
+  padding: 80px 0;
+  background: var(--surface);
+  position: relative; /* precisa disso pra o ::before das patinhas funcionar */
+}
+
+/* esse ::before cria a faixa de patinhas que aparece atrás dos cards
+   não é uma tag no HTML, o CSS cria sozinho */
+.sobre::before {
+  content: "";          /* obrigatório pra o pseudo-elemento aparecer */
+  position: absolute;
+  top: 250px;           /* distância do topo da seção, é so ajustar aqui se precisar mover */
+  left: 0;
+  width: 100%;
+  height: 350px;        /* altura da faixa */
+  background-image: url("assets/cattt.png"); 
+  background-repeat: repeat;      /* repete a imagem pra preencher tudo */
+  background-size: 80px 80px;     /* tamanho de cada patinha */
+  background-position: center;
+  opacity: 0.50;        /* quanto mais alto, mais visível a patinha */
+  pointer-events: none; /* o mouse passa por cima sem interferir */
+  z-index: 0;           /* fica atrás dos cards */
+}
+
+/* os 3 cards ficam numa grade responsiva lado a lado */
+.grade-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* se a tela for pequena, empilha */
+  gap: 24px;
+  position: relative;
+  z-index: 1; /* fica na frente da faixa de patinhas */
+}
+
+/* estilo base de cada card de informação */
+.card-info {
+  background: var(--bg);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-m);
+  padding: 28px;
+  transition: transform var(--transicao), box-shadow var(--transicao);
+}
+
+/* ao passar o mouse o card sobe um pouco e ganha sombra */
+.card-info:hover { transform: translateY(-4px); box-shadow: var(--sombra-m); }
+
+/* container da imagem no topo do card, com altura fixa */
+.imagem-card-perfil {
+  position: relative; /* precisa disso pro botãozinho de trocar funcionar */
+  width: 100%;
+  height: 140px;
+  overflow: hidden;   /* esconde o que passa da altura */
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+
+.imagem-card-perfil img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* a imagem cobre o espaço sem distorcer */
+  display: block;
+  transition: transform var(--transicao);
+}
+
+/* ao passar o mouse no card, a imagem cresce levinho */
+.card-info:hover .imagem-card-perfil img {
+  transform: scale(1.03);
+}
+
+/* botãozinho decorativo de trocar a imagem do card
+   fica no canto superior direito da imagem */
+.trocar-imagem {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(4px); /* efeito vidro */
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  box-shadow: var(--sombra-p);
+  cursor: default;
+  transition: background var(--transicao), transform var(--transicao);
+  background-image: url("assets/ediatr.jpg");
+  background-size: 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ao passar o mouse no card, o botão cresce levinho */
+.card-info:hover .trocar-imagem {
+  background: rgba(255,255,255,1);
+  transform: scale(1.1);
+}
+
+.card-info h3 { font-family: var(--titulo); font-size: 1.1rem; margin-bottom: 16px; }
+
+/* a lista de dados (Nome, CPF, etc) fica em duas colunas: chave e valor */
+.lista-dados {
+  display: grid;
+  grid-template-columns: auto 1fr; /* coluna da chave abraça o conteúdo, valor ocupa o resto */
+  gap: 8px 16px;
+  font-size: 0.88rem;
+}
+
+.lista-dados dt { color: var(--cinza); }          /* chave: "Nome", "CPF"... */
+.lista-dados dd { font-weight: 500; text-align: right; } /* valor alinhado à direita */
+
+
+/* =============================================
+   SEÇÃO MEUS PETS (as fichas de cada pet)
+   ============================================= */
+
+.pets { padding: 80px 0; }
+
+/* cada ficha de pet: foto na esquerda, dados na direita */
+.ficha-pet {
+  display: grid;
+  grid-template-columns: 220px 1fr; /* coluna da foto tem largura fixa */
+  background: var(--surface);
+  border-radius: var(--raio-g);
+  border: 1px solid var(--borda);
+  overflow: hidden; /* garante que a foto respeite o arredondamento */
+  margin-bottom: 32px;
+  box-shadow: var(--sombra-p);
+  transition: box-shadow var(--transicao), transform var(--transicao);
+  animation: subir 0.5s ease both; /* aparece subindo quando a página carrega */
+}
+
+.ficha-pet:hover { box-shadow: var(--sombra-m); transform: translateY(-3px); }
+
+/* container da foto do pet */
+.foto-pet {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative; /* precisa disso pro botão de trocar e a etiqueta funcionarem */
+}
+
+.avatar-pet {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* foto preenche o espaço sem distorcer */
+  border-radius: 0;
+  transition: transform 0.4s ease;
+}
+
+/* a foto do pet aumenta levinho ao passar o mouse na ficha */
+.ficha-pet:hover .avatar-pet { transform: scale(1.05); }
+
+/* botãozinho decorativo de trocar a foto do pet
+   fica escondido e aparece ao passar o mouse */
+.trocar-pet {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(6px);
+  border: 1.5px solid rgba(255,255,255,0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  cursor: default;
+  opacity: 0;               /* começa invisível */
+  transform: scale(0.8);    /* começa menor */
+  transition: opacity var(--transicao), transform var(--transicao);
+  background-image: url("assets/ediatr.jpg");
+  background-size: 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ao passar o mouse na ficha, o botão aparece com animação */
+.ficha-pet:hover .trocar-pet {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* cores de fundo dos avatares quando não tem foto */
+.cachorro { background: linear-gradient(135deg, #f0c97a, #d4a373); }
+.gato     { background: linear-gradient(135deg, #daa8ff, #c77dff); }
+
+/* etiqueta "Cão", "Gato" etc, fica centralizada na parte de baixo da foto */
+.etiqueta {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%); /* truque pra centralizar horizontalmente */
+  padding: 4px 14px;
+  border-radius: var(--raio-xl);
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap; /* não quebra em duas linhas */
+}
+
+.etiqueta-cao    { background: #fde8c4; color: #92400e; }
+.etiqueta-gato   { background: #f3d8ff; color: #6b21a8; }
+
+/* lado direito da ficha com os dados do pet */
+.dados-pet { padding: 32px; border-left: 1px solid var(--borda); }
+.dados-pet header { margin-bottom: 24px; }
+
+.dados-pet h3 { font-family: var(--titulo); font-size: 1.8rem; font-weight: 700; line-height: 1; }
+.raca { font-size: 0.88rem; color: var(--cinza); margin-top: 4px; }
+
+/* divide em duas colunas: dados básicos e histórico de saúde */
+.grade-ficha { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+/* lista de dados do pet: nascimento, idade, peso, etc */
+.ficha-dados {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px 16px;
+  font-size: 0.88rem;
+  align-content: start; /* alinha no topo */
+}
+
+.ficha-dados dt { color: var(--cinza); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.ficha-dados dd { font-weight: 500; }
+
+/* bolinha vermelha do tipo sanguíneo */
+.tipo-sanguineo {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+/* etiquetas de castrado sim/não */
+.etiqueta-sim { background: #d1fae5; color: #065f46; padding: 3px 10px; border-radius: 20px; font-size: 0.82rem; font-weight: 500; }
+.etiqueta-nao { background: #fee2e2; color: #991b1b; padding: 3px 10px; border-radius: 20px; font-size: 0.82rem; font-weight: 500; }
+
+.historico-saude h4 { font-family: var(--titulo); font-size: 1rem; margin-bottom: 14px; }
+.lista-saude { display: flex; flex-direction: column; gap: 10px; }
+
+/* cada item do histórico de saúde */
+.registro {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--raio-p);
+}
+
+.registro strong { font-size: 0.9rem; display: block; }
+.registro small  { font-size: 0.78rem; color: var(--cinza); display: block; }
+
+/* bolinha colorida que indica o status de saúde */
+.sheik-status { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+
+/* verde = saudável, amarelo = atenção, vermelho = alerta */
+.saudavel { background: #f0fdf4; }
+.saudavel .sheik-status { background: #22c55e; }
+.atencao  { background: #fffbeb; }
+.atencao  .sheik-status { background: #f59e0b; }
+.alerta   { background: #fff1f2; }
+.alerta   .sheik-status { background: #f43f5e; }
+
+
+/* =============================================
+   SEÇÃO AGENDA (fundo verde escuro)
+   ============================================= */
+
+.agenda {
+  padding: 80px 0;
+  background: linear-gradient(135deg, var(--verde) 0%, #1b4332 100%); /* degradê verde */
+  position: relative;
+  overflow: hidden;
+}
+
+/* decoração de fundo da agenda (não aparece porque falta o content) */
+.agenda::before {
+  position: absolute;
+  font-size: 20rem;
+  opacity: 0.04;
+  top: -60px; right: -60px;
+  pointer-events: none;
+}
+
+/* os cards de consulta ficam em grade responsiva */
+.grade-agenda {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+/* cada card de consulta: data | detalhes | status */
+.consulta {
+  background: rgba(255,255,255,0.1); /* fundo semi-transparente branco */
+  backdrop-filter: blur(10px);       /* efeito vidro */
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--raio-m);
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 64px 1fr auto; /* 3 colunas: data fixa, info flexível, status fixo */
+  gap: 16px;
+  align-items: center;
+  transition: background var(--transicao), transform var(--transicao);
+}
+
+/* consulta urgente tem fundo laranjado */
+.consulta.urgente { background: rgba(244,162,97,0.2); border-color: rgba(244,162,97,0.5); }
+.consulta:hover   { background: rgba(255,255,255,0.18); transform: translateY(-2px); }
+
+/* bloco da data (dia e mês) */
+.data-consulta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.15);
+  border-radius: var(--raio-p);
+  padding: 8px 0;
+}
+
+.data-consulta strong { font-size: 1.8rem; font-family: var(--titulo); color: #fff; line-height: 1; }
+.data-consulta span   { font-size: 0.7rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 1px; }
+
+/* textos de informação da consulta */
+.info-consulta h3   { color: #fff; font-size: 0.98rem; font-weight: 600; margin-bottom: 4px; }
+.info-consulta p    { color: rgba(255,255,255,0.7); font-size: 0.82rem; margin-bottom: 4px; }
+.info-consulta time { color: rgba(255,255,255,0.55); font-size: 0.78rem; }
+
+/* etiquetas de status das consultas */
+.status { padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+.status-urgente   { background: #f59e0b; color: #1c1000; }
+.status-confirmado{ background: #22c55e; color: #052e16; }
+.status-pendente  { background: rgba(255,255,255,0.2); color: rgba(255,255,255,0.9); }
+
+
+/* =============================================
+   SEÇÃO GALERIA
+   ============================================= */
+
+.galeria { padding: 80px 0; background: var(--surface); }
+
+/* grade de fotos: 4 colunas, 2 linhas
+   a foto grande ocupa 2 colunas e 2 linhas */
+.grade-fotos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 220px 220px;
+  gap: 16px;
+}
+
+.foto { border-radius: var(--raio-m); overflow: hidden; position: relative; }
+.foto-grande { grid-column: span 2; grid-row: span 2; } /* ocupa 2x2 na grade */
+
+.imagem {
+  transition: transform 0.4s ease;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--raio-m);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.foto:hover .imagem { transform: scale(1.04); } /* zoom ao passar o mouse */
+
+/* cada imagem aponta pra um arquivo diferente na pasta assets */
+.imagem-1 { background-image: url("assets/fotomissi.jpg"); }
+.imagem-2 { background-image: url("assets/pauli1.jpg"); }
+.imagem-3 { background-image: url("assets/missi2.jpg"); }
+.imagem-4 { background-image: url("assets/missi3.jpg"); }
+.imagem-5 { background-image: url("assets/paulinho2.jpg"); }
+
+/* legenda das fotos, fica no rodapé de cada imagem com degradê escuro */
+figcaption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.45));
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 16px 16px 12px;
+  border-radius: 0 0 var(--raio-m) var(--raio-m);
+}
+
+
+/* =============================================
+   SEÇÃO CONTATO
+   ============================================= */
+
+.contato { padding: 80px 0; }
+
+/* dois blocos lado a lado: texto de contato e card de agendamento */
+.contato-interno {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 60px;
+  align-items: center;
+}
+
+.contato-texto h2 { font-family: var(--titulo); font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 12px; }
+.contato-texto > p { color: var(--cinza); margin-bottom: 32px; max-width: 400px; }
+
+/* uso a tag address pro endereço e contatos, que é semanticamente correto */
+.contato-lista {
+  font-style: normal; /* a tag address deixa o texto em itálico por padrão, isso remove */
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 0.95rem;
+}
+
+.contato-lista p { display: flex; align-items: center; gap: 12px; }
+
+/* card branco do lado direito com os botões de agendar */
+.cartao-agendamento {
+  background: var(--surface);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-g);
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: var(--sombra-m);
+}
+
+.cartao-agendamento h3 { font-family: var(--titulo); font-size: 1.4rem; margin-bottom: 8px; }
+.cartao-agendamento > p { color: var(--cinza); font-size: 0.9rem; margin-bottom: 24px; }
+.cartao-agendamento .botao-principal  { display: block; margin-bottom: 12px; } /* ocupa largura total */
+.cartao-agendamento .botao-secundario { display: block; }
+
+
+/* =============================================
+   RODAPÉ
+   ============================================= */
+
+.rodape { background: #1b1b1b; color: rgba(255,255,255,0.75); }
+
+/* três colunas no rodapé: marca, navegação e créditos */
+.rodape-interno {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.5fr;
+  gap: 48px;
+  padding: 60px 24px 48px;
+  max-width: 1140px;
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.rodape-marca strong { font-family: var(--titulo); font-size: 1.3rem; color: #fff; margin-left: 8px; }
+.rodape-marca p { margin-top: 12px; font-size: 0.88rem; max-width: 220px; line-height: 1.6; }
+
+.rodape-interno nav h4,
+.rodape-creditos h4 {
+  color: #fff;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.rodape-interno nav ul { display: flex; flex-direction: column; gap: 8px; }
+.rodape-interno nav a  { color: rgba(255,255,255,0.65); font-size: 0.9rem; transition: color var(--transicao); }
+.rodape-interno nav a:hover { color: var(--verde-claro); }
+
+.rodape-creditos p      { font-size: 0.88rem; margin-bottom: 4px; color: rgba(255,255,255,0.65); }
+.rodape-creditos strong { color: rgba(255,255,255,0.9); }
+
+/* linha de copyright no final da página */
+.rodape-fim {
+  text-align: center;
+  padding: 20px 24px;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.4);
+}
+
+
+/* =============================================
+   RESPONSIVO - adapta o layout pra telas menores
+   ============================================= */
+
+/* tablet: telas até 900px */
+@media (max-width: 900px) {
+  .destaque { grid-template-columns: 1fr; min-height: auto; padding: 60px 24px 40px; } /* empilha os dois blocos */
+  .perfil-resumo { max-width: 420px; margin: 0 auto; width: 100%; }
+  .menu-links { gap: 18px; }
+  .ficha-pet  { grid-template-columns: 1fr; }    /* foto em cima, dados embaixo */
+  .foto-pet   { height: 220px; }                 /* altura fixa quando a foto vai pro topo */
+  .dados-pet  { border-left: none; border-top: 1px solid var(--borda); } /* linha no topo em vez da esquerda */
+  .grade-ficha { grid-template-columns: 1fr; gap: 20px; } /* dados e saúde empilhados */
+  .grade-fotos { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+  .foto-grande { grid-column: span 2; height: 220px; }    /* foto grande ocupa linha inteira */
+  .contato-interno { grid-template-columns: 1fr; gap: 40px; }
+  .rodape-interno  { grid-template-columns: 1fr 1fr; }
+  .rodape-marca    { grid-column: span 2; }
+  .trocar-pet { opacity: 1; transform: scale(1); } /* no celular o botão de trocar foto fica sempre visível */
+}
+
+/* celular: telas até 600px */
+@media (max-width: 600px) {
+  .menu-links  { display: none; }               /* esconde o menu (normalmente viraria um hamburguer) */
+  .grade-cards { grid-template-columns: 1fr; }  /* cards empilhados */
+  .consulta    { grid-template-columns: 60px 1fr; } /* remove a coluna de status */
+  .status      { grid-column: 1 / -1; text-align: center; } /* status vai pra linha inteira */
+  .grade-fotos { grid-template-columns: 1fr; }  /* galeria vira uma coluna só */
+  .foto-grande { grid-column: span 1; }
+  .rodape-interno { grid-template-columns: 1fr; }
+  .rodape-marca   { grid-column: span 1; }
+}
