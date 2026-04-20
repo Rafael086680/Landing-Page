@@ -1,5 +1,6 @@
 /* --- Aqui eu defino as cores e valores que vou usar no site inteiro.
-       Assim se eu quiser mudar uma cor, mudo só aqui e muda em todo lugar --- */
+       Assim se eu quiser mudar uma cor, mudo só aqui e muda em todo lugar
+       eu acho melhor fazer desse jeito pra padronizar as cores e efeitos do site, pra nao ficar muitas informaçoes diferentes/desorganizado --- */
 :root {
   --bg:          #faf8f5;   /* cor de fundo geral */
   --surface:     #ffffff;   /* branco puro, uso nos cards */
@@ -182,7 +183,7 @@ section h2 {
   max-width: 1140px;
   margin: 0 auto;
   padding: 80px 24px 60px;
-  overflow: visible;
+  overflow: visible; /* esse visible ajuda muito, ele borrou uma linha que ficou amostra */
 }
 
 /* estilo base das duas bolhas decorativas de fundo */
@@ -331,6 +332,7 @@ section h2 {
   background-size: 50px;
   background-repeat: no-repeat;
   background-position: center;
+  cursor: pointer;
 }
 
 /* ao passar o mouse, a borda fica verde com um brilho */
@@ -397,7 +399,7 @@ section h2 {
 .card-info {
   background: var(--bg);
   border: 1px solid var(--borda);
-  border-radius: var(--raio-m);
+  border-radius: 24px 6px; /* esse é um tipo/estilo diferente de border radius */
   padding: 28px;
   transition: transform var(--transicao), box-shadow var(--transicao);
 }
@@ -423,11 +425,6 @@ section h2 {
   transition: transform var(--transicao);
 }
 
-/* ao passar o mouse no card, a imagem cresce levinho */
-.card-info:hover .imagem-card-perfil img {
-  transform: scale(1.03);
-}
-
 /* botãozinho decorativo de trocar a imagem do card
    fica no canto superior direito da imagem */
 .trocar-imagem {
@@ -451,12 +448,12 @@ section h2 {
   background-size: 50px;
   background-repeat: no-repeat;
   background-position: center;
+  cursor: pointer; /* estiliza o cursor pra quando passar por cima da imagem ficar uma mãozinha */
 }
 
-/* ao passar o mouse no card, o botão cresce levinho */
-.card-info:hover .trocar-imagem {
-  background: rgba(255,255,255,1);
-  transform: scale(1.1);
+.trocar-imagem:hover {
+  border-color: var(--laranja);
+  box-shadow: 0 0 0 3px rgba(82,183,136,0.15);
 }
 
 .card-info h3 { font-family: var(--titulo); font-size: 1.1rem; margin-bottom: 16px; }
@@ -539,6 +536,11 @@ section h2 {
   background-size: 50px;
   background-repeat: no-repeat;
   background-position: center;
+  cursor: pointer;
+}
+
+.trocar-pet:hover{
+  border-color: (var(--cinza));
 }
 
 /* ao passar o mouse na ficha, o botão aparece com animação */
@@ -782,7 +784,7 @@ figcaption {
 .cartao-agendamento {
   background: var(--surface);
   border: 1px solid var(--borda);
-  border-radius: var(--raio-g);
+  border-radius: 50%20%/10%40%;
   padding: 40px 32px;
   text-align: center;
   box-shadow: var(--sombra-m);
@@ -792,7 +794,6 @@ figcaption {
 .cartao-agendamento > p { color: var(--cinza); font-size: 0.9rem; margin-bottom: 24px; }
 .cartao-agendamento .botao-principal  { display: block; margin-bottom: 12px; } /* ocupa largura total */
 .cartao-agendamento .botao-secundario { display: block; }
-
 
 /* =============================================
    RODAPÉ
