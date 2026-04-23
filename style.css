@@ -4,7 +4,7 @@
 :root {
   --bg:          #faf8f5;   /* cor de fundo geral */
   --surface:     #ffffff;   /* branco puro, uso nos cards */
-  --verde:       #2d6a4f;   /* verde escuro principal */
+  --verde:       #2d6a4f;   /* verde escuro principal */ 
   --verde-claro: #52b788;   /* verde mais claro pro hover e detalhes */   
   --laranja:     #f4a261;   /* laranja que uso nas bolinhas decorativas */
   --texto:       #1b1b1b;   /* cor do texto principal */
