@@ -98,7 +98,7 @@ Sem frameworks, sem JavaScript, sem bibliotecas externas.
 
 ---
 
-## 👨‍💻 Autor
+## Autor
 
 **Rafael Rodrigues Antonio**  
 Disciplina: Ferramentas Web e UX — HTML5 & CSS3  
